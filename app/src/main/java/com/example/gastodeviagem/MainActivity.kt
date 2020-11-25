@@ -32,13 +32,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     
     private fun calculate() {
         if (validationOk()) {
-            val distance = editTxtDistance.text.toString().toFloat()
-            val price = editTxtPrice.text.toString().toFloat()
-            val autonomy = editTxtAutonomy.text.toString().toFloat()
-            
-            val totalValue = (distance * price) / autonomy
-            txtViewTotalValue.text = "R$ ${"%.2f".format(totalValue)}"
-        } 
+            try {
+                val distance = editTxtDistance.text.toString().toFloat()
+                val price = editTxtPrice.text.toString().toFloat()
+                val autonomy = editTxtAutonomy.text.toString().toFloat()
+    
+                val totalValue = (distance * price) / autonomy
+                txtViewTotalValue.text = "R$ ${"%.2f".format(totalValue)}"
+            } catch (nfe: NumberFormatException) {
+                showToast(getString(R.string.informe_valores_validos))
+            }
+        } else {
+            showToast(getString(R.string.preencha_todos_campos))
+        }
     }
     
     private fun validationOk(): Boolean {
