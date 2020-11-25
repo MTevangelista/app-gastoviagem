@@ -3,6 +3,7 @@ package com.example.gastodeviagem
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     
     private fun setListeners() {
         buttonCalculate.setOnClickListener(this)
+    }
+    
+    private fun showToast(text: String) {
+        Toast.makeText(baseContext, text, Toast.LENGTH_LONG).show()
     }
     
     override fun onClick(view: View) {
@@ -33,7 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             
             val totalValue = (distance * price) / autonomy
             txtViewTotalValue.text = "R$ ${"%.2f".format(totalValue)}"
-        }
+        } 
     }
     
     private fun validationOk(): Boolean {
